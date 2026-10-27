@@ -1,0 +1,22 @@
+{
+  "name": "speedyboy1-community-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Session coordination bot for Speedyboy1's Community.",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "pm2:start": "npx pm2 start ecosystem.config.js",
+    "pm2:restart": "npx pm2 restart speedyboy1-community",
+    "pm2:logs": "npx pm2 logs speedyboy1-community"
+  },
+  "dependencies": {
+    "discord.js": "^14.25.1",
+    "dotenv": "^16.6.1",
+    "pm2": "^6.0.13"
+  },
+  "devDependencies": {
+    "canvas": "^3.2.3"
+  }
+}
