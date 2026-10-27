@@ -173,11 +173,7 @@ const commands = [
     .setDescription('Learn about the owner of the server.'),
   new SlashCommandBuilder()
     .setName(WEEKLY_REPORT_COMMAND)
-    .setDescription('Show activity from the past week.')
-    .addStringOption((option) => option
-      .setName('starting_date')
-      .setDescription('Monday to start the report from (YYYY-MM-DD).')
-      .setRequired(false)),
+    .setDescription('Show activity from the past week.'),
   new SlashCommandBuilder()
     .setName('driverlicense')
     .setDescription('Create or view your driver license.')
@@ -614,14 +610,6 @@ function mondayAtUtc(date) {
   const day = monday.getUTCDay();
   monday.setUTCDate(monday.getUTCDate() - (day === 1 ? 7 : (day + 6) % 7));
   return monday;
-}
-
-function parseWeeklyReportStart(value) {
-  if (!value) return mondayAtUtc(new Date());
-  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null;
-  const start = new Date(`${value}T00:00:00.000Z`);
-  if (Number.isNaN(start.getTime()) || start.toISOString().slice(0, 10) !== value || start.getUTCDay() !== 1) return null;
-  return start;
 }
 
 function formatReportDate(date) {
@@ -1096,16 +1084,9 @@ client.on('interactionCreate', async (interaction) => {
       return;
     }
 
-    const startingDate = interaction.options.getString('starting_date');
-    const start = parseWeeklyReportStart(startingDate);
-    if (!start) {
-      await interaction.reply({ content: 'The starting date must be a valid Monday in `YYYY-MM-DD` format.', ephemeral: true });
-      return;
-    }
-
     if (!(await safeDeferReply(interaction, { ephemeral: false }))) return;
     try {
-      const report = await collectWeeklyActivity(interaction.guild, start);
+      const report = await collectWeeklyActivity(interaction.guild, mondayAtUtc(new Date()));
       const reportId = `${interaction.guildId}-${Date.now()}`;
       weeklyReports.set(reportId, report);
       await safeEditReply(interaction, {
