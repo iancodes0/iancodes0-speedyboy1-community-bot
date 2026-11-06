@@ -13,6 +13,18 @@ Discord session coordination bot for the Southwest Florida Roblox roleplay serve
 7. Test with `npm start`.
 8. Keep it running with `npm run pm2:start`, then persist PM2 with `pm2 save` and `pm2 startup`.
 
+## Orbit Search
+
+This repository also includes a standalone web search engine UI. It proxies searches through DuckDuckGo's HTML endpoint so browser requests stay same-origin and no search API key is required.
+
+Run it with:
+
+```bash
+npm run search
+```
+
+Then open `http://localhost:3000`. Set `SEARCH_PORT` to use another port.
+
 Commands are guild-registered when the bot starts. The role gate is enforced in code, and the bot also applies Discord command permissions to role `1434165288248672277` when it has Manage Server.
 
 `/start up initiate` opens the reaction check. The bot's check mark counts toward the required total, and the host receives a DM when the total is reached. `/start up release` announces the release and reveals the private-server button only after the reaction check passes. Clicking the button sends the link as a private Discord message. Staff can use `?purge <number>` to delete messages. `/end` closes the active session.

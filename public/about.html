@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f6f8fc">
+    <title>About Orbit · Search</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div class="shell about-page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Orbit Search home">
+          <span class="brand-mark"><span></span><span></span><span></span></span>
+          <span>orbit<span class="brand-dot">.</span></span>
+        </a>
+        <nav><a href="/">Search</a><button class="icon-button" id="theme-toggle" aria-label="Toggle color theme">◐</button></nav>
+      </header>
+      <main>
+        <div class="about-card">
+          <div class="eyebrow"><span class="pulse"></span> About Orbit</div>
+          <h1>Search with a little<br><em>more intention.</em></h1>
+          <p>Orbit was made by <strong>Karaas Botros</strong> to make web search feel calmer, clearer, and easier to return to.</p>
+          <p>The idea started with a simple observation: finding one useful answer should not feel like navigating a crowded airport. Karaas built Orbit as a focused search home for curious people who want less clutter between a question and a good result.</p>
+          <div class="about-highlight">
+            <span>✦</span>
+            <div><strong>Made for the curious.</strong><br>Fast results, a quiet interface, and no unnecessary distractions.</div>
+          </div>
+          <a class="back-link" href="/">← Back to search</a>
+        </div>
+      </main>
+      <footer><span>Orbit Search</span><span>Results powered by DuckDuckGo</span><span>Built by Karaas Botros</span></footer>
+    </div>
+    <script>
+      const themeToggle = document.querySelector('#theme-toggle');
+      themeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark');
+        localStorage.setItem('orbit-theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+      });
+      if (localStorage.getItem('orbit-theme') === 'dark') document.body.classList.add('dark');
+    </script>
+  </body>
+</html>
